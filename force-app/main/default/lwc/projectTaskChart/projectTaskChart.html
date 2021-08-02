@@ -1,0 +1,13 @@
+<!--
+  @description       : 
+  @author            : Siddharth Patni
+  @group             : 
+  @last modified on  : 07-28-2021
+  @last modified by  : Siddharth Patni
+-->
+<template>
+    <div class="slds-m-around_small">
+       <lightning-combobox label="Project" placeholder="--Select Project--" options={projects} class="project" onchange={handleProjectSelection} value={project}> </lightning-combobox>
+    </div>
+    <c-pie_chart query={query} field="name" class="pieChart" ></c-pie_chart>
+</template>

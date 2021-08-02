@@ -1,0 +1,28 @@
+<!--
+  @description       : 
+  @author            : Siddharth Patni
+  @group             : 
+  @last modified on  : 07-27-2021
+  @last modified by  : Siddharth Patni
+-->
+<template>
+    <template if:true={showLoginForm}>
+        <c-login onlogingranted={handleLogin}></c-login>
+    </template>
+    <template if:false={showLoginForm}>
+            <c-log-time user={user} onsuccess={refreshPage} onlogout={logout}></c-log-time>
+            <div class="slds-grid slds-wrap" >
+                <div class="slds-col slds-size_2-of-3">
+                    <c-log-table user={user} class="LogTable"></c-log-table>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-card title="Hours Spent On Projects">
+                        <c-pie_chart query={projectQuery} field="name" ></c-pie_chart>
+                    </lightning-card>
+                    <lightning-card title="Hours Spent On Tasks">
+                        <c-project-task-chart user={user} class="ProjectTaskChart"></c-project-task-chart>
+                    </lightning-card>
+                </div>
+            </div>
+    </template>
+</template>

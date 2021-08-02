@@ -1,0 +1,59 @@
+<!--
+@description       : 
+@author            : Siddharth Patni
+@group             : 
+@last modified on  : 07-27-2021
+@last modified by  : Siddharth Patni
+Modifications Log 
+Ver   Date         Author            Modification
+1.0   07-20-2021   Siddharth Patni   Initial Version
+-->
+<template>
+    <div class="slds-box slds-theme_shade">  
+        <lightning-button label="Log Time" onclick={showModal} variant="brand"> </lightning-button>  
+        <lightning-button label="Log Out" onclick={logOut} class="slds-float_right" variant="destructive"> </lightning-button>  
+    </div>  
+    <template if:true={openModal}>  
+        <div class="slds-modal slds-fade-in-open slds-backdrop">  
+            <div class="slds-modal__container">  
+                <!------HEADER Section-->  
+                <div class="slds-modal__header">  
+                    
+                    <lightning-button-icon icon-name="utility:close" alternative-text="Close this window" size="large"  
+                        variant="bare-inverse" onclick={closeModal} class="slds-modal__close">  
+                    </lightning-button-icon>  
+                </div>  
+                <!------Body Section-->  
+                <div class="slds-modal__content slds-p-around_medium">  
+                    <div class="slds-grid slds-wrap slds-gutters" >
+                        
+                        <div class="slds-col slds-size_1-of-2" >
+                            <lightning-combobox label="Project" placeholder="--Select Project--" options={projects} class="project" onchange={handleProjectSelection}> </lightning-combobox>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-combobox label="Task" placeholder="--Select Task--" options={tasks} class="task" > </lightning-combobox>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3" >
+                            <lightning-input class="date" label="Date" name="Date" type=date value={currentDate} > </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3" >
+                            <lightning-input class="sTime" label="Start Time" name="startTime" type="time"></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning-input class="eTime" label="End Time" type="time" name="endTime" ></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1">
+                            <lightning-input class="desc" label="Description" name="Description" > </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-m-top_small">
+                            <lightning-input label="Billable ?" class="billable" type="checkbox" value="false"></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-m-top_small">
+                            <lightning-button label="Add" onclick={addLog}></lightning-button>
+                        </div>
+                    </div>
+                </div>  
+            </div>  
+        </div>  
+      </template>  
+</template>

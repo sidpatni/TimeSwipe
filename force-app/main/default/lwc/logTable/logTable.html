@@ -1,0 +1,26 @@
+<!--
+  @description       : 
+  @author            : Siddharth Patni
+  @group             : 
+  @last modified on  : 07-28-2021
+  @last modified by  : Siddharth Patni
+-->
+<template>
+    <lightning-card title="Time Logs">
+        <div style="height:500px">
+          <lightning-datatable key-field="Id"
+                  data={queryResult}
+                  columns={columns}
+                  enable-infinite-loading
+                  onloadmore={loadMoreData}
+                  hide-checkbox-column="true"
+                  show-row-number-column="true"
+                  default-sort-direction={defaultSortDirection}
+                  sorted-direction={sortDirection}
+                  wrap-text-max-lines="10"
+                  sorted-by={sortedBy}
+                  onsort={onHandleSort}>
+          </lightning-datatable> 
+        </div>
+    </lightning-card>
+</template>
