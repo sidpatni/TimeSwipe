@@ -33,11 +33,11 @@ export default class Time_Card extends LightningElement {
     @api
     user;
     get projectQuery(){
-        console.log("pjstr :"+this.projectQueryStr);
+        //console.log("pjstr :"+this.projectQueryStr);
         return this.projectQueryStr;
     }
     get taskQuery(){
-        console.log("tskStr:"+this.taskQueryStr);
+        //console.log("tskStr:"+this.taskQueryStr);
         return this.taskQueryStr;
     }
     handleSuccess() {
@@ -77,6 +77,7 @@ export default class Time_Card extends LightningElement {
             let taskOptions=[];
             getTasks({project : this.selectedProject})
             .then(result => {
+                console.l
                 for (let key of result) {
                     taskOptions.push({ label: key.label, value: key.value  });
                 }
@@ -85,7 +86,7 @@ export default class Time_Card extends LightningElement {
             .catch(error => {
                 this.dispatchEvent(new ShowToastEvent({
                     title: 'error while loading this component',
-                    message: error,
+                    message: "handleProjectSelection :"+error,
                     variant: 'error',
                 }));
             });
@@ -106,6 +107,7 @@ export default class Time_Card extends LightningElement {
     }
     async addLog(event){
         try{
+            /*
             const recordInput = {
                 apiName: Time_Log__c.objectApiName,
                 fields: {
@@ -128,7 +130,7 @@ export default class Time_Card extends LightningElement {
                     console.log(error);
                 });
 
-         /*
+         */
             var user= this.user;
             var project = this.template.querySelector(".project").value;
             var task = this.template.querySelector(".task").value;
@@ -137,11 +139,11 @@ export default class Time_Card extends LightningElement {
             var eTime = this.template.querySelector(".eTime").value;
             var descrip =this.template.querySelector(".desc").value;
             var billable = this.template.querySelector(".billable").checked ;
-            
-            
-            await logTime( {user : user, project:project, task:task, logDate:new Date(logDate), sTime:sTime, eTime: eTime, descrip: descrip,billable: billable})
+            console.log(logDate);
+            await logTime( {user : user, project:project, task:task, logDate: logDate, sTime:sTime, eTime: eTime, descrip: descrip,billable: billable})
                 .then(data=>{
-                    if(data===200){
+
+                    if(data===200){ 
                         this.handleSuccess();
                     }else if(data === 201){
                         console.log("log failed ,check debug log in developer console for more info");
@@ -149,7 +151,7 @@ export default class Time_Card extends LightningElement {
                 })
                 .catch(error=>{
                     console.log(error);
-                });*/
+                });
         }catch(error){
             console.log("error= "+error);
         }

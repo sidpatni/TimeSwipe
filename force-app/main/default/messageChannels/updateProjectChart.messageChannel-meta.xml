@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>projectQuery</masterLabel>
+    <isExposed>true</isExposed>
+    <description>Message Channel to pass query</description>
+     <lightningMessageFields>
+        <fieldName>query</fieldName>
+        <description>query to be used in child component pi_chart</description>
+    </lightningMessageFields>
+    
+</LightningMessageChannel>

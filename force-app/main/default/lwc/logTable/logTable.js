@@ -8,7 +8,7 @@ const columns = [
     //{ label: 'Name', fieldName: 'Name', type: 'text', sortable: true},
     { label: 'Project', fieldName: 'Project', type: 'text', sortable: true},
     { label: 'Task', fieldName: 'Task', type: 'text', sortable: true},
-    { label: 'Time', fieldName: 'Time', type: 'text', sortable: true, initialWidth :100},
+    { label: 'Time', fieldName: 'Time', type: 'text', sortable: false, initialWidth :100},
     //{ label: 'Minutes', fieldName: 'Minutes__c', type: 'text', sortable: true},
     { label: 'Date', fieldName: 'Date__c', type: 'date', sortable: true, initialWidth :100},
     { label: 'Billable', fieldName: 'Billable__c', type: 'boolean', sortable: true , initialWidth :90},
@@ -42,7 +42,7 @@ export default class LogTable extends LightningElement {
         this.sortDirection = 'asc';
         this.sortedBy;
         this.loadData();
-        console.log("reload data called successfully");
+        //console.log("reload data called successfully");
         if(this.targetDatatable){
             console.log("enableInfiniteLoading enabled");
             this.targetDatatable.enableInfiniteLoading = true;
@@ -50,11 +50,11 @@ export default class LogTable extends LightningElement {
     }
     loadData(){
         try {
-            console.log("loadDataCalled");
+            //console.log("loadDataCalled");
             return  getLogs({ limitSize: this.rowLimit , offset : this.rowOffSet ,user:this.user})
             .then(result => {
-                console.log("result length :"+result.length);
-                if(result.length < 1){
+                //console.log("result length :"+result.length);
+                if(result.length < 1 && this.targetDatatable){
                     this.targetDatatable.enableInfiniteLoading = false;
                     return;
                 }
@@ -82,7 +82,7 @@ export default class LogTable extends LightningElement {
 
     loadMoreData(event) {
         try {
-            console.log("loadmoreData called");
+            //console.log("loadmoreData called");
             const currentRecord = this.queryResult;
             const { target } = event;
             target.isLoading = true;

@@ -4,7 +4,7 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 
 import { publish, MessageContext } from 'lightning/messageService';
-import RefreshChart from '@salesforce/messageChannel/refreshChart__c';
+//import RefreshChart from '@salesforce/messageChannel/refreshChart__c';
 
 export default class ProjectTaskChart extends LightningElement {
     taskQueryStr="SELECT SUM(Hours__c),SUM(minutes__c),Task__r.name FROM Time_Log__c where  User__c =\'"+this.user+"\' AND Project__c =\'"+this.project+"\' GROUP BY Task__r.name";
@@ -54,7 +54,7 @@ export default class ProjectTaskChart extends LightningElement {
         }
     }
     get projects(){
-        console.log('available projects : '+this.projectList.length);
+        //console.log('available projects : '+this.projectList.length);
         return this.projectList;
     }
     resetQuery(){
@@ -65,7 +65,7 @@ export default class ProjectTaskChart extends LightningElement {
         this.resetQuery();
     }
     get query(){
-        console.log("getQuery "+this.taskQueryStr);
+        //console.log("getQuery "+this.taskQueryStr);
         return this.taskQueryStr;
     }
 }

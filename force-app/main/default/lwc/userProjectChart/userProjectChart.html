@@ -1,0 +1,16 @@
+<!--
+  @description       : 
+  @author            : Siddharth Patni
+  @group             : 
+  @last modified on  : 08-02-2021
+  @last modified by  : Siddharth Patni
+-->
+<template>
+    <template if:true={query}>
+      <lightning-card title="Hours Spent On Projects">
+          <c-pie_chart query={projectQuery} field="name" ></c-pie_chart>
+      </lightning-card>
+  </template>
+  <p>{query}</p>
+  <lightning-button label="refresh" onclick={handleRefresh}></lightning-button>
+</template>

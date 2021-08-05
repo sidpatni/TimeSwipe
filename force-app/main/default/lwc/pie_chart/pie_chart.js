@@ -4,7 +4,7 @@
  */
  import { LightningElement, wire , track,api } from 'lwc';
  import makeAggregateQuery from '@salesforce/apex/LogData.makeAggregateQuery';
- import makeAggregateQuery1 from '@salesforce/apex/LogData.makeAggregateQuery1';
+ import makeAggregateQueryWired from '@salesforce/apex/LogData.makeAggregateQueryWired';
  
  import ChartJs from '@salesforce/resourceUrl/ChartJs';
  import { loadScript } from 'lightning/platformResourceLoader';
@@ -14,7 +14,7 @@
      chartConfiguration;
      @api field;
      @api query;
-     hasData=false;
+     hasData=true;
      
      connectedCallback(){
          this.loadData();
@@ -23,7 +23,7 @@
      loadData(){
         makeAggregateQuery({query:this.query,field:this.field})
             .then(data => {
-                console.log("in load data promise",data);
+                //console.log("in load data promise",data);
                 this.loadHelper(data,null);
             })
             .catch(error => {
@@ -42,7 +42,7 @@
                 console.log(error);
                 return;
             }
-            console.log(this.query+"----- : ---------"+this.field);
+            //console.log(this.query+"----- : ---------"+this.field);
 
             
                         let chartAmtData = [];
@@ -50,47 +50,51 @@
                         if(data){
                             data.forEach(obj => {
                                 chartAmtData.push(obj.totalTime);
-                                console.log(obj.totalTime+" : "+obj.field);
+                                //console.log(obj.totalTime+" : "+obj.field);
                                 chartLabel.push(obj.field);
                             });
-                        } else{
-                            console.log(this.query+"- : -"+this.field);
-                        }
-                        this.chartConfiguration = {
-                            type: 'doughnut',
-                            data: {
-                                datasets: [
-                                    {
-                                        label: this.field,
-                                        backgroundColor:  [
-                                            "#CDA776",
-                                            "#989898",
-                                            "#CB252B",
-                                            "#E39371",
-                                            "#1D7A46",
-        
-                                            "#D3212D",
-                                            "#FFBF00",
-                                            "#3DDC84",
-                                            "#8DB600",
-                                            "#008000",
-        
-                                            "#A1CAF1",
-                                            "#F4C2C2",
-                                            "#9F8170",
-                                            "#FFE4C4",
-                                            "#660000",
-                                        ],
-                                        data: chartAmtData,
-                                    },
-                                ],
-                                labels: chartLabel,
-                            },
-                            options: {},
-                        };
+                        } 
+                        
+                        if(chartAmtData){
+                            this.chartConfiguration = {
+                                type: 'doughnut',
+                                data: {
+                                    datasets: [
+                                        {
+                                            label: this.field,
+                                            backgroundColor:  [
+                                                "#CDA776",
+                                                "#989898",
+                                                "#CB252B",
+                                                "#E39371",
+                                                "#1D7A46",
+            
+                                                "#D3212D",
+                                                "#FFBF00",
+                                                "#3DDC84",
+                                                "#8DB600",
+                                                "#008000",
+            
+                                                "#A1CAF1",
+                                                "#F4C2C2",
+                                                "#9F8170",
+                                                "#FFE4C4",
+                                                "#660000",
+                                            ],
+                                            data: chartAmtData,
+                                        },
+                                    ],
+                                    labels: chartLabel,
+                                },
+                                options: {},
+                            };
+                        
                         this.error = undefined;
+                        
                         this.promiseMaker();
-                    
+                        } else{
+                            this.hasData=false;
+                        }
                 
             
         } catch (error) {
@@ -104,7 +108,7 @@
             console.log(error);        
         }
      }
-     @wire(makeAggregateQuery1, { query: '$query' ,field : '$field' })
+     @wire(makeAggregateQueryWired, { query: '$query' ,field : '$field' })
      makeAggregateQuery({ error, data }) {
         this.loadHelper(data,error);
      }
